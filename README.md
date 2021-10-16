@@ -182,7 +182,6 @@ The following attributes are exported in the outputs of the module:
 
   All attributes of the created 'iam_binding' or 'iam_member' or 'iam_policy' resource according to the mode.
 
-
 ## External Documentation
 
 ### Google Documentation
@@ -250,7 +249,7 @@ Copyright &copy; 2020-2021 [Mineiros GmbH][homepage]
 
 <!-- markdown-link-check-disable -->
 
-[badge-build]: https://github.com/mineiros-io/terraform-google-premium-modules/workflows/Tests/badge.svg
+[badge-build]: https://github.com/mineiros-io/terraform-google-cloud-function-iam/workflows/Tests/badge.svg
 
 <!-- markdown-link-check-enable -->
 
@@ -261,8 +260,8 @@ Copyright &copy; 2020-2021 [Mineiros GmbH][homepage]
 
 <!-- markdown-link-check-disable -->
 
-[build-status]: https://github.com/mineiros-io/terraform-google-premium-modules/modules/terraform-google-cloud-function-iam/actions
-[releases-github]: https://github.com/mineiros-io/terraform-google-premium-modules/modules/terraform-google-cloud-function-iam/releases
+[build-status]: https://github.com/mineiros-io/terraform-google-cloud-function-iam/actions
+[releases-github]: https://github.com/mineiros-io/terraform-google-cloud-function-iam/releases
 
 <!-- markdown-link-check-enable -->
 
@@ -277,12 +276,12 @@ Copyright &copy; 2020-2021 [Mineiros GmbH][homepage]
 
 <!-- markdown-link-check-disable -->
 
-[variables.tf]: https://github.com/mineiros-io/terraform-google-premium-modules/blob/modules/terraform-google-cloud-function-iam/main/variables.tf
-[examples/]: https://github.com/mineiros-io/terraform-google-premium-modules/blob/modules/terraform-google-cloud-function-iam/main/examples
-[issues]: https://github.com/mineiros-io/terraform-google-premium-modules/issues
-[license]: https://github.com/mineiros-io/terraform-google-premium-modules/blob/main/LICENSE
-[makefile]: https://github.com/mineiros-io/terraform-google-premium-modules/blob/main/Makefile
-[pull requests]: https://github.com/mineiros-io/terraform-google-premium-modules/pulls
-[contribution guidelines]: https://github.com/mineiros-io/terraform-google-premium-modules/blob/main/CONTRIBUTING.md
+[variables.tf]: https://github.com/mineiros-io/terraform-google-cloud-function-iam/blob/main/variables.tf
+[examples/]: https://github.com/mineiros-io/terraform-google-cloud-function-iam/blob/main/examples
+[issues]: https://github.com/mineiros-io/terraform-google-cloud-function-iam/issues
+[license]: https://github.com/mineiros-io/terraform-google-cloud-function-iam/blob/main/LICENSE
+[makefile]: https://github.com/mineiros-io/terraform-google-cloud-function-iam/blob/main/Makefile
+[pull requests]: https://github.com/mineiros-io/terraform-google-cloud-function-iam/pulls
+[contribution guidelines]: https://github.com/mineiros-io/terraform-google-cloud-function-iam/blob/main/CONTRIBUTING.md
 
 <!-- markdown-link-check-enable -->
