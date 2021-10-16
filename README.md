@@ -15,59 +15,34 @@ This module is part of our Infrastructure as Code (IaC) framework
 that enables our users and customers to easily deploy and manage reusable,
 secure, and production-grade cloud infrastructure.
 
-- [Module Features](#module-features)
-- [Getting Started](#getting-started)
-- [Module Argument Reference](#module-argument-reference)
-  - [Top-level Arguments](#top-level-arguments)
-    - [Module Configuration](#module-configuration)
-    - [Main Resource Configuration](#main-resource-configuration)
-    - [Extended Resource Configuration](#extended-resource-configuration)
-- [Module Attributes Reference](#module-attributes-reference)
-- [External Documentation](#external-documentation)
-- [Module Versioning](#module-versioning)
-  - [Backwards compatibility in `0.0.z` and `0.y.z` version](#backwards-compatibility-in-00z-and-0yz-version)
-- [About Mineiros](#about-mineiros)
-- [Reporting Issues](#reporting-issues)
-- [Contributing](#contributing)
-- [Makefile Targets](#makefile-targets)
-- [License](#license)
+- [terraform-google-cloud-function-iam](#terraform-google-cloud-function-iam)
+  - [Module Features](#module-features)
+  - [Getting Started](#getting-started)
+  - [Module Argument Reference](#module-argument-reference)
+    - [Top-level Arguments](#top-level-arguments)
+      - [Module Configuration](#module-configuration)
+      - [Main Resource Configuration](#main-resource-configuration)
+      - [Extended Resource Configuration](#extended-resource-configuration)
+  - [Module Attributes Reference](#module-attributes-reference)
+  - [External Documentation](#external-documentation)
+    - [Google Documentation](#google-documentation)
+    - [Terraform Google Provider Documentation:](#terraform-google-provider-documentation)
+  - [Module Versioning](#module-versioning)
+    - [Backwards compatibility in `0.0.z` and `0.y.z` version](#backwards-compatibility-in-00z-and-0yz-version)
+  - [About Mineiros](#about-mineiros)
+  - [Reporting Issues](#reporting-issues)
+  - [Contributing](#contributing)
+  - [Makefile Targets](#makefile-targets)
+  - [License](#license)
 
 ## Module Features
 
-<!-- info: please adjust the following text -->
-
 This module implements the following terraform resources
 
-- `google_resource`
-- `google_something_else`
-
-and supports additional features of the following modules:
-
-<!-- markdown-link-check-disable -->
-- [mineiros-io/something/google](https://github.com/mineiros-io/terraform-google-something)
-<!-- markdown-link-check-enable -->
-
-<!--
-These are some of our custom features:
-
-- **Default Security Settings**:
-  secure by default by setting security to `true`, additional security can be added by setting some feature to `enabled`
-
-- **Standard Module Features**:
-  Cool Feature of the main resource, tags
-
-- **Extended Module Features**:
-  Awesome Extended Feature of an additional related resource,
-  and another Cool Feature
-
-- **Additional Features**:
-  a Cool Feature that is not actually a resource but a cool set up from us
-
-- _Features not yet implemented_:
-  Standard Features missing,
-  Extended Features planned,
-  Additional Features planned
--->
+- `google_cloudfunctions_function_iam_binding`
+- `google_cloudfunctions_function_iam_member`
+- `google_cloudfunctions_function_iam_policy`
+- `google_iam_policy`
 
 ## Getting Started
 
@@ -76,6 +51,10 @@ Most basic usage just setting required arguments:
 ```hcl
 module "terraform-google-cloud-function-iam" {
   source = "github.com/mineiros-io/terraform-google-cloud-function-iam?ref=v0.1.0"
+
+  cloud_function  = "my-function"
+  role            = "roles/viewer"
+  members         = ["user:member@example.com"]
 }
 ```
 
@@ -107,58 +86,87 @@ See [variables.tf] and [examples/] for details and use-cases.
 
 #### Main Resource Configuration
 
-<!-- Example of a required variable:
+- **`cloud_function`**: **_(Required `string`)_**
 
-- **`name`**: **_(Required `string`)_**
+  Used to find the parent resource to bind the IAM policy to.
 
-  The name of the resource.
+- **`members`**: **_(Optional `string`)_
 
-  Default is `"name"`.
+  Identities that will be granted the privilege in role. Each entry can have one of the following values:
+  - `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account.
+  - `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account.
+  - `user:{emailid}`: An email address that represents a specific Google account. For example, alice@gmail.com or joe@example.com.
+  - `serviceAccount:{emailid}`: An email address that represents a service account. For example, my-other-app@appspot.gserviceaccount.com.
+  - `group:{emailid}`: An email address that represents a Google group. For example, admins@example.com.
+  - `domain:{domain}`: A G Suite domain (primary, instead of alias) name that represents all the users of that domain. For example, google.com or example.com.
 
--->
+  Default is `[]`.
 
-<!-- Example of an optional variable:
+- **`role`**: _(Optional `string`)_
 
-- **`name`**: _(Optional `string`)_
+  The role that should be applied. Note that custom roles must be of the format `[projects|organizations]/{parent-name}/roles/{role-name}`.
 
-  The name of the resource.
+- **`project`**: _(Optional `string`)_
 
-  Default is `"name"`.
+  The resource name of the project the policy is attached to. Its format is `projects/{project_id}`.
 
--->
+- **`authoritative`**: _(Optional `bool`)_
 
-<!-- Example of an object:
-     - We use inline documentation to describe complex objects or lists/maps of complex objects.
-     - Please indent each level with 2 spaces so the documentation is rendered in a readable way.
+  Whether to exclusively set (authoritative mode) or add (non-authoritative/additive mode) members to the role.
 
-- **`user`**: _(Optional `object(user)`)_
+  Default is `true`.
 
-  A user object.
+- **`policy_bindings`**: _(Optional `list(policy_bindings)`)_
+
+  A list of IAM policy bindings.
 
   Example
 
   ```hcl
-  user = {
-    name        = "marius"
-    description = "The guy from Berlin."
-  }
+  policy_bindings = [{
+    role    = "roles/viewer"
+    members = ["user:member@example.com"]
+  }]
   ```
 
-  Default is `{}`.
+  Each `policy_bindings` object can can the fllowing fields:
 
-  A/Each `user` object can have the following fields:
+  - **`role`**: **_(Required `string`)_**
 
-  - **`name`**: **_(Required `string`)_**
+    The role that should be applied.
 
-    The Name of the user.
+  - **`members`**: **_(Required `string`)_**
 
-  - **`description`**: _(Optional `decription`)_
+    Identities that will be granted the privilege in `role`.
 
-    A description describing the user in more detail.
+    Default is `var.members`.
 
-    Default is `""`.
+  - **`condition`**: _(Optional `object(condition)`)_
 
--->
+    An IAM Condition for a given binding.
+
+    Example
+
+    ```hcl
+    condition = {
+      expression = "request.time < timestamp(\"2022-01-01T00:00:00Z\")"
+      title      = "expires_after_2021_12_31"
+    }
+    ```
+
+  A `condition` object can can the fllowing fields:
+
+  - **`expression`**: **_(Required `string`)_**
+
+    Textual representation of an expression in Common Expression Language syntax.
+
+  - **`title`**: **_(Required `string`)_**
+
+    A title for the expression, i.e. a short string describing its purpose.
+
+  - **`description`**: _(Optional `string`)_
+
+    An optional description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
 
 #### Extended Resource Configuration
 
@@ -170,19 +178,20 @@ The following attributes are exported in the outputs of the module:
 
   Whether this module is enabled.
 
-<!-- all outputs in outputs.tf-->
+- **`iam`**
+
+  All attributes of the created 'iam_binding' or 'iam_member' or 'iam_policy' resource according to the mode.
+
 
 ## External Documentation
 
 ### Google Documentation
-<!-- markdown-link-check-disable -->
 
-  - https://link-to-docs
+  - <https://cloud.google.com/functions/docs/reference/iam/roles>
 
 ### Terraform Google Provider Documentation:
 
-  - https://www.terraform.io/docs/providers/google/r/something.html
-<!-- markdown-link-check-disable -->
+  - <https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/cloudfunctions_function_iam>
 
 ## Module Versioning
 
