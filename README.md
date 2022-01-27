@@ -24,7 +24,7 @@ secure, and production-grade cloud infrastructure.
   - [Top-level Arguments](#top-level-arguments)
     - [Module Configuration](#module-configuration)
     - [Main Resource Configuration](#main-resource-configuration)
-- [Module Attributes Reference](#module-attributes-reference)
+- [Module Outputs](#module-outputs)
 - [External Documentation](#external-documentation)
   - [Google Documentation](#google-documentation)
   - [Terraform Google Provider Documentation:](#terraform-google-provider-documentation)
@@ -175,13 +175,14 @@ See [variables.tf] and [examples/] for details and use-cases.
 
       An optional description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
 
-## Module Attributes Reference
+## Module Outputs
 
 The following attributes are exported in the outputs of the module:
 
-- **`iam`**
+- [**`iam`**](#output-iam): *(`object(iam)`)*<a name="output-iam"></a>
 
-  All attributes of the created `iam_binding` or `iam_member` or `iam_policy` resource according to the mode.
+  All attributes of the created `iam_binding` or `iam_member` or
+  `iam_policy` resource according to the mode.
 
 ## External Documentation
 
