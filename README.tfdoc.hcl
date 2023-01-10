@@ -391,10 +391,10 @@ references {
     value = "https://semver.org/"
   }
   ref "variables.tf" {
-    value = "https://github.com/mineiros-io/terraform-google-cloud-function-iam/main/variables.tf"
+    value = "https://github.com/mineiros-io/terraform-google-cloud-function-iam/blob/main/variables.tf"
   }
   ref "examples/" {
-    value = "https://github.com/mineiros-io/terraform-google-cloud-function-iam/main/examples"
+    value = "https://github.com/mineiros-io/terraform-google-cloud-function-iam/tree/main/examples"
   }
   ref "issues" {
     value = "https://github.com/mineiros-io/terraform-google-cloud-function-iam/issues"

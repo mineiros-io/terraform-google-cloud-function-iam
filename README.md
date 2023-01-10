@@ -264,8 +264,8 @@ Copyright &copy; 2020-2022 [Mineiros GmbH][homepage]
 [terraform]: https://www.terraform.io
 [gcp]: https://cloud.google.com/
 [semantic versioning (semver)]: https://semver.org/
-[variables.tf]: https://github.com/mineiros-io/terraform-google-cloud-function-iam/main/variables.tf
-[examples/]: https://github.com/mineiros-io/terraform-google-cloud-function-iam/main/examples
+[variables.tf]: https://github.com/mineiros-io/terraform-google-cloud-function-iam/blob/main/variables.tf
+[examples/]: https://github.com/mineiros-io/terraform-google-cloud-function-iam/tree/main/examples
 [issues]: https://github.com/mineiros-io/terraform-google-cloud-function-iam/issues
 [license]: https://github.com/mineiros-io/terraform-google-cloud-function-iam/blob/main/LICENSE
 [makefile]: https://github.com/mineiros-io/terraform-google-cloud-function-iam/blob/main/Makefile
