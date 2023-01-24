@@ -22,8 +22,8 @@ secure, and production-grade cloud infrastructure.
 - [Getting Started](#getting-started)
 - [Module Argument Reference](#module-argument-reference)
   - [Top-level Arguments](#top-level-arguments)
-    - [Module Configuration](#module-configuration)
     - [Main Resource Configuration](#main-resource-configuration)
+    - [Module Configuration](#module-configuration)
 - [Module Outputs](#module-outputs)
 - [External Documentation](#external-documentation)
   - [Google Documentation](#google-documentation)
@@ -64,26 +64,6 @@ See [variables.tf] and [examples/] for details and use-cases.
 
 ### Top-level Arguments
 
-#### Module Configuration
-
-- [**`module_enabled`**](#var-module_enabled): *(Optional `bool`)*<a name="var-module_enabled"></a>
-
-  Specifies whether resources in the module will be created.
-
-  Default is `true`.
-
-- [**`module_depends_on`**](#var-module_depends_on): *(Optional `list(dependency)`)*<a name="var-module_depends_on"></a>
-
-  A list of dependencies. Any object can be _assigned_ to this list to define a hidden external dependency.
-
-  Example:
-
-  ```hcl
-  module_depends_on = [
-    google_network.network
-  ]
-  ```
-
 #### Main Resource Configuration
 
 - [**`cloud_function`**](#var-cloud_function): *(**Required** `string`)*<a name="var-cloud_function"></a>
@@ -106,8 +86,16 @@ See [variables.tf] and [examples/] for details and use-cases.
   - `projectOwner:projectid`: Owners of the given project. For example, `projectOwner:my-example-project`
   - `projectEditor:projectid`: Editors of the given project. For example, `projectEditor:my-example-project`
   - `projectViewer:projectid`: Viewers of the given project. For example, `projectViewer:my-example-project`
+  - `computed:{identifier}`: An existing key from var.computed_members_map.
 
   Default is `[]`.
+
+- [**`computed_members_map`**](#var-computed_members_map): *(Optional `map(string)`)*<a name="var-computed_members_map"></a>
+
+  A map of identifiers to identities to be replaced in `var.members` or in members of `policy_bindings` to handle terraform computed values.
+  The format of each value must satisfy the format as described in `var.members`.
+
+  Default is `{}`.
 
 - [**`role`**](#var-role): *(Optional `string`)*<a name="var-role"></a>
 
@@ -174,6 +162,26 @@ See [variables.tf] and [examples/] for details and use-cases.
     - [**`description`**](#attr-policy_bindings-condition-description): *(Optional `string`)*<a name="attr-policy_bindings-condition-description"></a>
 
       An optional description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
+
+#### Module Configuration
+
+- [**`module_enabled`**](#var-module_enabled): *(Optional `bool`)*<a name="var-module_enabled"></a>
+
+  Specifies whether resources in the module will be created.
+
+  Default is `true`.
+
+- [**`module_depends_on`**](#var-module_depends_on): *(Optional `list(dependency)`)*<a name="var-module_depends_on"></a>
+
+  A list of dependencies. Any object can be _assigned_ to this list to define a hidden external dependency.
+
+  Example:
+
+  ```hcl
+  module_depends_on = [
+    google_network.network
+  ]
+  ```
 
 ## Module Outputs
 
@@ -242,7 +250,7 @@ Run `make help` to see details on each available target.
 This module is licensed under the Apache License Version 2.0, January 2004.
 Please see [LICENSE] for full details.
 
-Copyright &copy; 2020-2022 [Mineiros GmbH][homepage]
+Copyright &copy; 2020-2023 [Mineiros GmbH][homepage]
 
 
 <!-- References -->
