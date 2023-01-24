@@ -1,9 +1,13 @@
-# module "test" {
-#   source = "../.."
+module "test" {
+  source = "../.."
 
-#   module_enabled = false
+  module_enabled = false
 
-#   # add all required arguments
+  # add all required arguments
 
-#   # add all optional arguments that create additional/extended resources
-# }
+  cloud_function = "test"
+
+  # add all optional arguments that create additional/extended resources
+
+  # add most/all other optional arguments
+}
