@@ -9,7 +9,5 @@ module "test" {
 
   role = "roles/viewer"
 
-  members = ["user:user@example.com"]
-
   # add most/all other optional arguments
 }

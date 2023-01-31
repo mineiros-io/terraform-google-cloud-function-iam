@@ -85,30 +85,6 @@ section {
       title = "Top-level Arguments"
 
       section {
-        title = "Module Configuration"
-
-        variable "module_enabled" {
-          type        = bool
-          default     = true
-          description = <<-END
-            Specifies whether resources in the module will be created.
-          END
-        }
-
-        variable "module_depends_on" {
-          type           = list(dependency)
-          description    = <<-END
-            A list of dependencies. Any object can be _assigned_ to this list to define a hidden external dependency.
-          END
-          readme_example = <<-END
-            module_depends_on = [
-              google_network.network
-            ]
-          END
-        }
-      }
-
-      section {
         title = "Main Resource Configuration"
 
         variable "cloud_function" {
@@ -140,7 +116,27 @@ section {
             - `projectOwner:projectid`: Owners of the given project. For example, `projectOwner:my-example-project`
             - `projectEditor:projectid`: Editors of the given project. For example, `projectEditor:my-example-project`
             - `projectViewer:projectid`: Viewers of the given project. For example, `projectViewer:my-example-project`
+            - `computed:{identifier}`: An existing key from var.computed_members_map.
           END
+        }
+
+        variable "computed_members_map" {
+          type        = map(string)
+          default     = {}
+          description = <<-END
+             A map of identifiers to identities to be replaced in `var.members` or in members of `policy_bindings` to handle terraform computed values.
+             The format of each value must satisfy the format as described in `var.members`.
+           END
+          # TODO: terradoc does not allow the use of variables in examples
+          # readme_example = <<-END
+          #   members = [
+          #     "user:member@example.com",
+          #     "computed:myserviceaccount",
+          #   ]
+          #   computed_members_map = {
+          #     myserviceaccount = "serviceAccount:${google_service_account.service_account.id}"
+          #   }
+          # END
         }
 
         variable "role" {
@@ -228,6 +224,32 @@ section {
               END
             }
           }
+        }
+      }
+
+
+
+      section {
+        title = "Module Configuration"
+
+        variable "module_enabled" {
+          type        = bool
+          default     = true
+          description = <<-END
+            Specifies whether resources in the module will be created.
+          END
+        }
+
+        variable "module_depends_on" {
+          type           = list(dependency)
+          description    = <<-END
+            A list of dependencies. Any object can be _assigned_ to this list to define a hidden external dependency.
+          END
+          readme_example = <<-END
+            module_depends_on = [
+              google_network.network
+            ]
+          END
         }
       }
     }
@@ -333,7 +355,7 @@ section {
       This module is licensed under the Apache License Version 2.0, January 2004.
       Please see [LICENSE] for full details.
 
-      Copyright &copy; 2020-2022 [Mineiros GmbH][homepage]
+      Copyright &copy; 2020-2023 [Mineiros GmbH][homepage]
     END
   }
 }

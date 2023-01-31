@@ -1,10 +1,11 @@
-terraform {
-  required_version = ">= 0.14, < 2.0"
+// TERRAMATE: GENERATED AUTOMATICALLY DO NOT EDIT
 
+terraform {
+  required_version = "~> 1.0, != 1.1.0, != 1.1.1"
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = ">= 3.59, < 5.0"
+      version = "~> 4.0"
     }
   }
 }
