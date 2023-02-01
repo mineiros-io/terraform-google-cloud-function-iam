@@ -65,7 +65,7 @@ section {
 
       ```hcl
       module "terraform-google-cloud-function-iam" {
-        source = "github.com/mineiros-io/terraform-google-cloud-function-iam?ref=v0.0.3"
+        source = "github.com/mineiros-io/terraform-google-cloud-function-iam?ref=v0.1.0"
 
         cloud_function = "my-function"
         role           = "roles/viewer"
